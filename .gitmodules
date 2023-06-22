@@ -1,3 +1,6 @@
 [submodule "lib/graph2"]
 	path = lib/graph2
 	url = git@github.com:cykrr/graph2
+[submodule "lib/yoga"]
+	path = lib/yoga
+	url = https://github.com/facebook/yoga
