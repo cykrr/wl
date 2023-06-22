@@ -21,7 +21,7 @@ wayland_client = dependency('wayland-client',
 egl=dependency('egl', required: false, disabler: true)
 
 
-deps = [wayland_client, wayland_egl, wayland_cursor, egl]
+glfw_deps = [wayland_client, wayland_egl, wayland_cursor, egl]
 
 
 
@@ -147,7 +147,7 @@ glfw = static_library('glfw',
   sources: glfw_sources + protocols_code,
   include_directories: [glfw_dir + 'src'],
   c_args:['-D_GLFW_WAYLAND'],
-  dependencies: deps)
+  dependencies: glfw_deps)
 
 
 ## Graph2
@@ -155,4 +155,5 @@ glfw = static_library('glfw',
 subdir('graph2')
 
 deps = [glfw, graph2, glad]
+deps_include = [glfw_include, graph2_include, glad_include]
 

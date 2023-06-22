@@ -15,7 +15,7 @@ include_dir = [include_directories('include'), ]
 exe = executable('layer_shell_example', 
   src,
   link_with: deps,
-  include_directories: [include_dir, glad_include],
+  include_directories: [include_dir] + deps_include,
   cpp_args: ['-g']
 )
 
