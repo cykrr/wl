@@ -4,3 +4,9 @@
 [submodule "lib/yoga"]
 	path = lib/yoga
 	url = https://github.com/facebook/yoga
+[submodule "lib/nanovgXC"]
+	path = lib/nanovgXC
+	url = https://github.com/styluslabs/nanovgXC
+[submodule "lib/stb"]
+	path = lib/stb
+	url = https://github.com/nothings/stb

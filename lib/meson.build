@@ -1,4 +1,4 @@
-## GLAD
+# GLAD
 
 glad_src = ['glad/src/glad.c'] 
 glad_include = include_directories('glad/include')
@@ -9,7 +9,11 @@ glad = static_library(
   include_directories: glad_include
   )
 
-## GLFW
+# STB
+
+stb_include = [include_directories('stb')]
+
+# GLFW
 
 
 wayland_egl = dependency('wayland-egl')
@@ -25,7 +29,7 @@ glfw_deps = [wayland_client, wayland_egl, wayland_cursor, egl]
 
 
 
-# Wayland code/header generation
+## Wayland code/header generation
 
 wayland_protos = dependency('wayland-protocols',
   version: '>=1.23',
@@ -73,8 +77,7 @@ protocols = {
     }
 }
 
-# Generate headers from Wayland protocol XML files
-# 
+## Generate headers from Wayland protocol XML files
 protocols_code = []
 foreach name, proto : protocols 
   code = custom_target(
@@ -154,6 +157,28 @@ glfw = static_library('glfw',
 
 subdir('graph2')
 
-deps = [glfw, graph2, glad]
-deps_include = [glfw_include, graph2_include, glad_include]
+## NanoVGXC
+
+nanovg_files = [
+  'nanovgXC/src/fontstash.h',
+  'nanovgXC/src/nanovg.h',
+  'nanovgXC/src/nanovg_gl.h',
+  'nanovgXC/src/nanovg_gl_utils.h',
+  'nanovgXC/src/nanovg.c',
+]
+
+nanovg_include = include_directories('nanovgXC/src/')
+
+nanovg = static_library('nanovg', 
+  sources: nanovg_files,
+  link_with: glad,
+  include_directories: [nanovg_include, stb_include]
+  )
+
+
+## Final declarations
+
+deps = [glfw, graph2, glad, nanovg]
+deps_include = [glfw_include, graph2_include, glad_include,
+  nanovg_include,]
 
