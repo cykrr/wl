@@ -72,6 +72,10 @@ protocols = {
   'wayland-idle-inhibit-unstable-v1': {
     'dir': wl_protocol_dir / 'unstable/idle-inhibit/idle-inhibit-unstable-v1.xml'
   },
+  'wayland-fractional-scale-v1': {
+    'dir': wl_protocol_dir / 'staging/fractional-scale/fractional-scale-v1.xml'
+  },
+
   'wayland' : {
     'dir': wl_client_dir / 'wayland.xml'
     }
@@ -175,10 +179,32 @@ nanovg = static_library('nanovg',
   include_directories: [nanovg_include, stb_include]
   )
 
+## Yoga 
+#
+yoga_files = [
+    'yoga/yoga/event/event.cpp',
+    'yoga/yoga/log.cpp',
+    'yoga/yoga/Utils.cpp',
+    'yoga/yoga/YGConfig.cpp',
+    'yoga/yoga/YGEnums.cpp',
+    'yoga/yoga/YGLayout.cpp',
+    'yoga/yoga/YGNode.cpp',
+    'yoga/yoga/YGStyle.cpp',
+    'yoga/yoga/YGValue.cpp',
+    'yoga/yoga/Yoga.cpp',
+  ]
+
+yoga_include = include_directories('./yoga/')
+
+yoga = static_library('yoga', 
+  sources: yoga_files,
+  include_directories: [yoga_include]
+  )
+
 
 ## Final declarations
 
-deps = [glfw, graph2, glad, nanovg]
+deps = [glfw, graph2, glad, nanovg, yoga]
 deps_include = [glfw_include, graph2_include, glad_include,
-  nanovg_include,]
+  nanovg_include, yoga_include, stb_include]
 
